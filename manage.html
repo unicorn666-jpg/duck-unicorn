@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>單字管理</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page page-manage">
+    <header class="app-header">
+      <div>
+        <h1>單字管理</h1>
+        <p>新增、編輯、刪除單字資料，並可自動填入翻譯與詞性。</p>
+      </div>
+      <a class="button button-secondary" href="index.html">回到學習頁</a>
+    </header>
+
+    <form class="manage-form" id="wordForm">
+      <div class="field-group">
+        <label for="wordInput">英文單字</label>
+        <input id="wordInput" type="text" placeholder="輸入英文單字" required />
+      </div>
+      <div class="field-group">
+        <label for="translationInput">中文解釋</label>
+        <textarea id="translationInput" rows="3" placeholder="中文解釋"></textarea>
+      </div>
+      <div class="field-group">
+        <label for="posInput">詞性</label>
+        <input id="posInput" type="text" placeholder="詞性，例如 noun / verb" />
+      </div>
+      <div class="field-group">
+        <label for="rootInput">字根分析</label>
+        <textarea id="rootInput" rows="3" placeholder="字根、字首、字尾分析"></textarea>
+      </div>
+      <div class="field-group">
+        <label for="exampleInput">例句 / 備註</label>
+        <textarea id="exampleInput" rows="2" placeholder="例句或補充說明"></textarea>
+      </div>
+      <div class="form-actions">
+        <button class="button button-primary" type="button" id="autoFillBtn">自動填入</button>
+        <button class="button button-success" type="submit">新增單字</button>
+      </div>
+      <p class="status-message" id="statusMessage"></p>
+    </form>
+
+    <section class="manage-list">
+      <h2>已儲存單字</h2>
+      <div id="wordList"></div>
+    </section>
+  </main>
+
+  <script src="manage.js"></script>
+</body>
+</html>

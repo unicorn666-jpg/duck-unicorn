@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>背單字卡片</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page page-home">
+    <header class="app-header">
+      <div>
+        <h1>背單字卡片</h1>
+        <p>點擊卡片翻面，學習英文單字與中文解釋。</p>
+      </div>
+      <a class="button button-secondary" href="manage.html">管理單字</a>
+    </header>
+
+    <section class="card-panel">
+      <div class="flashcard" id="flashcard">
+        <div class="card-face card-front" id="cardFront"></div>
+        <div class="card-face card-back" id="cardBack"></div>
+      </div>
+      <div class="card-controls">
+        <button class="button" id="prevBtn">上一張</button>
+        <span id="counter">0 / 0</span>
+        <button class="button" id="nextBtn">下一張</button>
+      </div>
+    </section>
+
+    <section class="hint-box">
+      <p>若沒有資料，請先到管理頁新增單字。</p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
