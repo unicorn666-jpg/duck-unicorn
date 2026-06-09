@@ -37,23 +37,19 @@ function renderList() {
 
   cards.forEach((item, index) => {
     const card = document.createElement('div');
-    card.className = 'word-card p-4 rounded-2xl bg-black/35 border border-red-500/15 mb-4 shadow-[0_0_18px_rgba(127,29,29,0.18)]';
+    card.className = 'word-card';
     card.innerHTML = `
-      <div class="flex items-center justify-between">
-        <div>
-          <strong class="text-lg text-red-50">${item.word}</strong>
-          <div class="text-sm text-red-100/60">${item.pos || '詞性未填'} • ${item.translation || '翻譯未填'}</div>
-        </div>
-        <div class="flex gap-2 items-center">
-          <button class="text-sm text-red-100 bg-red-950/80 border border-red-500/20 px-3 py-1 rounded-full" type="button" data-index="${index}">刪除</button>
-        </div>
+      <div>
+        <strong>${item.word}</strong>
+        <div class="word-meta">${item.pos || '詞性未填'} • ${item.translation || '翻譯未填'}</div>
       </div>
-      <div class="mt-3 text-sm text-red-100/75">
-        <p><strong>字根分析：</strong> ${item.root || '暫無'}</p>
-        <p class="mt-1"><strong>例句/備註：</strong> ${item.example || '暫無'}</p>
+      <div>
+        <p><strong>字根分析：</strong>${item.root || '暫無'}</p>
+        <p><strong>例句/備註：</strong>${item.example || '暫無'}</p>
       </div>
+      <button class="button" type="button" data-index="${index}">刪除</button>
     `;
-    const deleteButton = card.querySelector('button[type="button"]');
+    const deleteButton = card.querySelector('button');
     deleteButton.addEventListener('click', () => {
       cards.splice(index, 1);
       saveCards();
@@ -65,7 +61,7 @@ function renderList() {
 
 function setStatus(message, isError = false) {
   statusMessage.textContent = message;
-  statusMessage.style.color = isError ? '#fca5a5' : 'rgba(255, 237, 213, 0.72)';
+  statusMessage.style.color = isError ? '#b91c1c' : 'var(--muted)';
 }
 
 async function autoFill() {
