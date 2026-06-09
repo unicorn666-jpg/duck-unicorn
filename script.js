@@ -9,6 +9,28 @@ const counterElement = document.getElementById('counter');
 let cards = [];
 let currentIndex = 0;
 
+function formatPartOfSpeech(pos) {
+  const normalized = (pos || '').toLowerCase().trim();
+  const map = {
+    noun: '名詞',
+    n: '名詞',
+    verb: '動詞',
+    v: '動詞',
+    adjective: '形容詞',
+    adj: '形容詞',
+    adverb: '副詞',
+    adv: '副詞',
+    pronoun: '代名詞',
+    prep: '介系詞',
+    preposition: '介系詞',
+    conjunction: '連接詞',
+    conj: '連接詞',
+    interjection: '感嘆詞',
+  };
+
+  return map[normalized] || pos || '暫無';
+}
+
 function loadCards() {
   const stored = localStorage.getItem(STORAGE_KEY);
   if (stored) {
@@ -47,10 +69,7 @@ function renderCard() {
   frontElement.textContent = item.word || '無資料';
   backElement.innerHTML = `
     <div class="back-card-content">
-      <p><strong>中文解釋：</strong>${item.translation || '暫無'}</p>
-      <p><strong>詞性：</strong>${item.pos || '暫無'}</p>
-      <p><strong>字根分析：</strong>${item.root || '暫無'}</p>
-      <p><strong>例句/備註：</strong>${item.example || '暫無'}</p>
+      <p class="text-2xl font-black text-red-50">${item.translation || '暫無翻譯'}</p>
     </div>
   `;
   counterElement.textContent = `${currentIndex + 1} / ${cards.length}`;
