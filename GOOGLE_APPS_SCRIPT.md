@@ -116,9 +116,15 @@ function jsonResponse(payload) {
 1. 點選右上角：**部署 > 新增部署**。
 2. 類型選擇：**Web App**。
 3. 執行身分：選擇你的 Gmail 帳號。
-4. 具有存取權的使用者：選擇 **我**。
+4. 具有存取權的使用者：選擇 **任何人，包括匿名使用者**。
 5. 點擊 **部署**。
 6. 複製部署完成後產生的網址。它會像這樣：`https://script.google.com/macros/s/XXXXXXXXXXXX/exec`。
+
+> 如果你已經修改過 Apps Script 程式碼，請務必重新部署新版 Web App，否則前端送出的請求仍會連到舊版本。
+>
+> 如果表單仍無法送出，請確認 Apps Script 的存取權限設定為「任何人，包括匿名使用者」。
+>
+> 如果你使用的是 `manage.html`，請確保是透過 GitHub Pages 或 Web 伺服器存取該 HTML，而不是直接以 `file://` 打開。
 
 ## 4. 更新前端代碼
 1. 打開 `app.js`（或 `docs/app.js`），將開頭的 `APPS_SCRIPT_URL` 更新為你剛剛複製的 Web App 網址：

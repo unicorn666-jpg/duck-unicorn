@@ -14,6 +14,14 @@ const resourceBox = document.getElementById('resourceBox');
 document.getElementById('autoPersonalBtn').addEventListener('click', autoFillPersonal);
 document.getElementById('autoCountryBtn').addEventListener('click', autoFillCountry);
 
+function getAppsScriptUrl() {
+  if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.includes('YOUR_APPS_SCRIPT_URL_HERE')) {
+    setStatus('請先在 docs/app.js 中設定 Apps Script exec URL，並重新部署 Apps Script。', true);
+    return null;
+  }
+  return APPS_SCRIPT_URL;
+}
+
 async function autoFillPersonal() {
   setStatus('載入中…');
   try {
@@ -60,6 +68,16 @@ function setStatus(msg, isError = false) {
 
 counselForm.addEventListener('submit', async (e) => {
   e.preventDefault();
+  const endpoint = getAppsScriptUrl();
+  if (!endpoint) {
+    return;
+  }
+
+  if (!messageInput.value.trim()) {
+    setStatus('請先填寫需求說明，再送出表單。', true);
+    return;
+  }
+
   setStatus('送出中…');
 
   const payload = {
@@ -78,18 +96,24 @@ counselForm.addEventListener('submit', async (e) => {
   try {
     const res = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
-    const data = await res.json();
-    if (data.success) {
-      setStatus('表單已送出，感謝您。');
-      counselForm.reset();
-    } else {
-      throw new Error(data.error || '儲存失敗');
+    const text = await res.text();
+    let data;
+    try {
+      data = JSON.parse(text);
+    } catch (jsonError) {
+      throw new Error(`非 JSON 回應：${text}`);
     }
+
+    if (!res.ok || !data.success) {
+      throw new Error(data.error || `HTTP ${res.status} ${res.statusText}`);
+    }
+
+    setStatus('表單已送出，感謝您。');
+    counselForm.reset();
   } catch (err) {
     console.error(err);
-    setStatus('無法送出表單，請稍後再試或聯絡站方。', true);
+    setStatus('無法送出表單，請確認 Apps Script Web App 是否允許任何人存取，或稍後再試。', true);
   }
 });
