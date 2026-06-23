@@ -1,5 +1,5 @@
 // 請在部署 Apps Script 後，把 APPS_SCRIPT_URL 設定為你的 Web App URL
-const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL_HERE'; // e.g. https://script.google.com/macros/s/XXXX/exec
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzi36sGtL0amaCeP8wkgcEl88fSfHOnsflRYFrU9jIO9C_dpl_nmHOjkqtdCsdNKli6mQ/exec';
 
 const counselForm = document.getElementById('counselForm');
 const nameInput = document.getElementById('nameInput');
